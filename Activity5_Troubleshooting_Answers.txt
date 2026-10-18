@@ -1,0 +1,63 @@
+CS223 — Git Mastery & Troubleshooting Activity
+Part 2: Git Troubleshooting Scenarios — Answer Sheet
+
+1. Accidentally staged a sensitive .env file; unstage it while keeping the file and its changes.
+   Command:
+   git restore --staged .env
+   Alternative:
+   git reset HEAD .env
+   Explanation: Removes .env from the staging area without deleting the file or its contents.
+
+2. Fix the last commit message before pushing.
+   Command:
+   git commit --amend -m "Fixed authentication typo"
+   Explanation: Replaces the most recent commit message. Use this before pushing the commit.
+
+3. Forgot to include styles.css in the previous commit; add it without changing the commit message.
+   Commands:
+   git add styles.css
+   git commit --amend --no-edit
+   Explanation: Stages styles.css and amends the previous commit while keeping its existing message.
+
+4. Discard uncommitted, unstaged changes to index.html.
+   Command:
+   git restore index.html
+   Alternative:
+   git checkout -- index.html
+   Explanation: Restores index.html to its last committed state. Uncommitted changes to that file will be lost.
+
+5. Made three commits on main by mistake instead of a feature branch, and they have not been pushed.
+   Commands:
+   git branch new-feature
+   git reset HEAD~3 --hard
+   git checkout new-feature
+   Explanation: Creates new-feature at the current commit, moves main back three commits, then switches to new-feature where those commits remain. The --hard reset discards working-tree changes, so use this only when the scenario matches and you understand the effect.
+
+6. In detached HEAD state with commits, create a branch to preserve them.
+   Command:
+   git switch -c recovery-branch
+   Alternative:
+   git checkout -b recovery-branch
+   Explanation: Creates and switches to recovery-branch at the current commit, preserving the commits on a named branch.
+
+7. Undo a bug that has already been pushed, without rewriting history.
+   Command:
+   git revert <buggy-commit-hash>
+   Explanation: Creates a new commit that reverses the changes introduced by the specified commit.
+
+8. Recover a deleted branch using a commit hash found in the reflog.
+   Command:
+   git branch <deleted-branch-name> <commit-hash>
+   Explanation: Recreates the branch name pointing at the recovered commit.
+
+9. Files were deleted in File Explorer, and Git status lists them as deleted under unstaged changes. Stage the deletions.
+   Command:
+   git add -u
+   Alternative:
+   git rm <filename>
+   Explanation: Stages updates and deletions of tracked files. The alternative stages a specified tracked file's removal.
+
+10. Delete the remote branch named testing-junk.
+    Command:
+    git push origin --delete testing-junk
+    Explanation: Deletes testing-junk from the remote repository named origin.
