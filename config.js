@@ -1,5 +1,5 @@
 const config = {
-    paymentProvider: "PayPal"
+    paymentProvider: "Square"
 };
 
 module.exports = config;
